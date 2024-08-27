@@ -26,28 +26,28 @@ SUPERLULIB   	= libsuperlu_mt$(PLAT).a
 MATHLIB		= -lm 
 MPLIB		= -lpthread
 
-# BLASDEF 	= -DUSE_VENDOR_BLAS
-# BLASLIB		= /Users/xsli/Dropbox/Codes/SuperLU/superlu_mt.git/CBLAS/libblas.a
-BLASLIB		= ../lib/libblas$(PLAT).a
+BLASDEF 	= -DUSE_VENDOR_BLAS
+BLASLIB		= -lopenblas
+#BLASLIB		= ../lib/libblas$(PLAT).a
 LIBS		= $(SUPERLULIB) ${BLASLIB}
 
 #
 #  The archiver and the flag(s) to use when building archive (library)
 #  If your system has no ranlib, set RANLIB = echo.
 #
-ARCH         = /usr/bin/ar
+ARCH         = ar
 ARCHFLAGS    = cr
-RANLIB       = /usr/bin/ranlib
+RANLIB       = echo
 
 ############################################################################
 #
 # Definitions used by CPP:
-PREDEFS      	= -D__PTHREAD  ## -DDEBUGlevel=0 -DPRNTlevel=0
+PREDEFS      	= -D__PTHREAD  -DDEBUGlevel=0 -DPRNTlevel=0
 #
 CC           	= gcc
 CFLAGS       	= $(PREDEFS) -g -std=c99 -O3
 # Uncomment the following to use 64-bit integer
-# CFLAGS          += -D_LONGINT
+CFLAGS          += -D_LONGINT
 
 #
 # There are a few files that should NOT be optimized, which appear in the
